@@ -12,7 +12,9 @@ class MainLayout extends StatefulWidget {
 }
 
 class MainLayoutState extends State<MainLayout> with TickerProviderStateMixin {
-  static double drawerWidth = 200;
+  static const double drawerWidth = 200;
+
+  static const  double avatarSize = 20;
 
   AnimationController? iconAnimationController;
 
@@ -51,10 +53,12 @@ class MainLayoutState extends State<MainLayout> with TickerProviderStateMixin {
             color: Colors.white,
             child: SafeArea(
                 bottom: false,
-                child: Stack(
+                child: Column(
                   children: [
-                    IgnorePointer(ignoring: isDrawerOpen, child: widget.child!),
-                    buildMainViewAppBar(context)
+                    buildMainViewAppBar(context),
+                    Expanded(
+                        child: IgnorePointer(
+                            ignoring: isDrawerOpen, child: widget.child!)),
                   ],
                 ))));
   }
@@ -66,16 +70,39 @@ class MainLayoutState extends State<MainLayout> with TickerProviderStateMixin {
   }
 
   Widget buildMainViewAppBar(BuildContext context) {
+
+    const String avatarUrl =  'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg';
+
+    BoxDecoration avatarBoxDecoration =  const BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 10, //阴影范围
+              spreadRadius: 0.1, //阴影浓度
+              color: Colors.grey //阴影颜色
+          )
+        ],
+        borderRadius: BorderRadius.all(Radius.circular(avatarSize))
+    );
+
     return Container(
       color: Colors.white,
-      padding: AppTheme.viewPadding,
+      padding: const EdgeInsets.symmetric( vertical: 10, horizontal: AppTheme.viewHorizontalPadding),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
               onTap: handleOnMenuIconTap,
               child: AnimatedIcon(
                   icon: AnimatedIcons.arrow_menu,
-                  progress: iconAnimationController!))
+                  progress: iconAnimationController!)),
+          IgnorePointer(
+            ignoring: isDrawerOpen,
+            child: Container(
+              decoration:avatarBoxDecoration,
+              child: const CircleAvatar(radius: avatarSize, backgroundImage: NetworkImage(avatarUrl)),
+            ),
+          )
         ],
       ),
     );
