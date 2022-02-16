@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:unsplash_flutter/layouts/main_layout.dart';
 import 'package:unsplash_flutter/routes_options.dart';
 import 'package:unsplash_flutter/utils/utils.dart';
-import 'components/drawer_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,21 +16,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
-        home: DrawerView(
-            drawerView: buildDrawerView(context),
-            mainView: buildMainView(context)));
-  }
-
-  Widget buildDrawerView(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        child: SafeArea(child: Container(color: Colors.red)));
-  }
-
-  Widget buildMainView(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        child: SafeArea(
+        home: MainLayout(
             child: Navigator(
                 initialRoute: PageRouters.initRoute,
                 onGenerateRoute: generateDrawerRoute)));
