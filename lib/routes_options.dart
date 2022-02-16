@@ -20,7 +20,7 @@ class PageName {
 
 class PageRouters {
 
-  static const String initRoute = PageName.collections;
+  static const String initRoute = PageName.home;
 
   static final Map<String, WidgetBuilder> drawerRoutes = {
 

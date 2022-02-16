@@ -10,17 +10,19 @@ class CollectionsView extends StatefulWidget {
 }
 
 class _CollectionsView extends State<CollectionsView> {
-  final String title = 'Collections';
-  final String subTitle = 'Explore the world through collections of beautiful HD pictures';
+  static const String title = 'Collections';
+  static const String subTitle = 'Explore the world through collections of beautiful HD pictures';
 
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: AppTheme.viewHorizontalPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [TitleView(title: title, subTitle: subTitle)],
-        ));
+        child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [TitleView(title: title, subTitle: subTitle)],
+            )));
   }
 }
