@@ -15,6 +15,24 @@ class HomeViewState extends State<HomeView> {
   static const String subTitle = 'Beautiful,free photos.';
   static const String searchInputHintText = "Search photos";
 
+  TextEditingController? searchInputController;
+  String? searchText;
+
+  @override
+  void initState() {
+    initSearchInputController();
+    super.initState();
+  }
+
+  void initSearchInputController() {
+    searchInputController = TextEditingController();
+    searchInputController?.addListener(() {
+      setState(() {
+        searchText = searchInputController?.text;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,9 +43,12 @@ class HomeViewState extends State<HomeView> {
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                TitleView(title: title, subTitle: subTitle),
-                SearchInput(hintText: searchInputHintText)
+              children: [
+                const TitleView(title: title, subTitle: subTitle),
+                SearchInput(
+                    controller: searchInputController,
+                    hintText: searchInputHintText,
+                    margin: const EdgeInsets.only(top: 30))
               ],
             )));
   }
