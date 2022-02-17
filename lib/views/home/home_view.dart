@@ -21,7 +21,7 @@ class HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    DioManager.getDioInstance()?.get("http://www.baidu.com");
+    DioManager.getDioInstance()?.get("/photos/random");
     initSearchInputController();
     super.initState();
   }

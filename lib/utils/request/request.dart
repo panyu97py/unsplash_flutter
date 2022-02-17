@@ -31,11 +31,20 @@ class DioManager {
 }
 
 class DioHttpInterceptor extends Interceptor {
+
+  static const String defaultAuthorization = "Client-ID " + RequestConfig.accessKey;
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+
+    options.headers['Accept-Version'] = "v1";
+
+    options.headers['Authorization'] = defaultAuthorization;
+
     if (kDebugMode) {
-      print(options);
+      print(options.uri);
     }
+
     super.onRequest(options, handler);
   }
 
