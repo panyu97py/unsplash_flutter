@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unsplash_flutter/app_theme.dart';
 import 'package:unsplash_flutter/components/title_View.dart';
+import 'package:unsplash_flutter/utils/request/request.dart';
 import 'components/search_input.dart';
 
 class HomeView extends StatefulWidget {
@@ -12,7 +13,7 @@ class HomeView extends StatefulWidget {
 
 class HomeViewState extends State<HomeView> {
   static const String title = 'Unsplash';
-  static const String subTitle = 'Beautiful,free photos.';
+  static const String subTitle = 'Beautiful, free photos.';
   static const String searchInputHintText = "Search photos";
 
   TextEditingController? searchInputController;

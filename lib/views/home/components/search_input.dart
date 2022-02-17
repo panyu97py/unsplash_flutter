@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unsplash_flutter/utils/utils.dart';
+import 'package:unsplash_flutter/utils/hex_color.dart';
 
 class SearchInput extends StatelessWidget {
   const SearchInput(
