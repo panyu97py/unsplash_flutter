@@ -1,16 +1,22 @@
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:unsplash_flutter/utils/request/config.dart';
 
 class DioManager {
   static DioManager? _instance;
 
+  Dio? _dio;
+
   static DioManager? getInstance() {
     _instance ??= DioManager._init();
     return _instance;
   }
 
-  Dio? _dio;
+  static Dio? getDioInstance() {
+    return getInstance()?._dio;
+  }
 
   DioManager._init() {
     _dio ??= Dio(BaseOptions(
@@ -18,6 +24,8 @@ class DioManager {
         connectTimeout: RequestConfig.connectTimeout,
         receiveTimeout: RequestConfig.receiveTimeout));
 
+    CookieJar cookieJarInterceptor = CookieJar();
+    _dio!.interceptors.add(CookieManager(cookieJarInterceptor));
     _dio!.interceptors.add(DioHttpInterceptor());
   }
 }
