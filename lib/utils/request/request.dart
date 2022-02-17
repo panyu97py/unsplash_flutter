@@ -32,14 +32,12 @@ class DioManager {
 
 class DioHttpInterceptor extends Interceptor {
 
-  static const String defaultAuthorization = "Client-ID " + RequestConfig.accessKey;
-
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
 
-    options.headers['Accept-Version'] = "v1";
+    options.headers['Accept-Version'] = RequestConfig.acceptVersion;
 
-    options.headers['Authorization'] = defaultAuthorization;
+    options.headers['Authorization'] = RequestConfig.defaultAuthorization;
 
     if (kDebugMode) {
       print(options.uri);
