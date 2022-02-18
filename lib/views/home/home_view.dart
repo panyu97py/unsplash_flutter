@@ -6,6 +6,7 @@ import 'package:unsplash_flutter/components/title_View.dart';
 import 'package:unsplash_flutter/api/photo_api_server.dart';
 import 'package:unsplash_flutter/model/photo.dart';
 import 'package:unsplash_flutter/utils/pageable.dart';
+import 'package:unsplash_flutter/components/flow_view.dart';
 import 'components/search_input.dart';
 
 class HomeView extends StatefulWidget {
@@ -54,7 +55,7 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> imgList = photoList.map((Photo photo) => ImageView(src: photo.urls.small!)).toList();
+    List<Widget> imgList = photoList.map((Photo photo) => ImageView(src: photo.urls.small!, margin: const EdgeInsets.only(bottom: 20))).toList();
 
     return Container(
         color: Colors.white,
@@ -66,7 +67,7 @@ class HomeViewState extends State<HomeView> {
               children: [
                 const TitleView(title: title, subTitle: subTitle),
                 SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30)),
-                ...imgList
+                Container(margin: const EdgeInsets.only(top: 20), child: FlowView(children: imgList))
               ],
             )));
   }
