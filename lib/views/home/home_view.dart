@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:unsplash_flutter/constant/app_theme.dart';
 import 'package:unsplash_flutter/components/title_View.dart';
@@ -23,19 +22,22 @@ class HomeViewState extends State<HomeView> {
   TextEditingController? searchInputController;
   String? searchText;
 
+  /// 照片列表
+  List<Photo> photoList = [];
+
   @override
   void initState() {
-    getPhotoDetail();
+    getPhotoList();
     initSearchInputController();
     super.initState();
   }
 
-  Future getPhotoDetail() async {
-    Response? response = await PhotoApiServer.getPhotoDetail(id: "z3htkdHUh5w");
-    Photo photo = Photo.fromJson(response?.data);
-    if (kDebugMode) {
-      print(photo.user.id);
-    }
+  Future getPhotoList() async {
+    Response? response = await PhotoApiServer.getPhotoList();
+    List jsonList = response?.data as List;
+    setState(() {
+      photoList = jsonList.map((photo) => Photo.fromJson(photo)).toList();
+    });
   }
 
   void initSearchInputController() {
@@ -51,6 +53,7 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    List <Widget> imgList = photoList.map((Photo photo) => Image.network(photo.urls.small!)).toList();
     return Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: AppTheme.viewHorizontalPadding),
@@ -60,7 +63,8 @@ class HomeViewState extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const TitleView(title: title, subTitle: subTitle),
-                SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30))
+                SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30)),
+                ...imgList
               ],
             )));
   }

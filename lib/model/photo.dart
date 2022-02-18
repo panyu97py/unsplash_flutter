@@ -1,5 +1,8 @@
+import 'package:unsplash_flutter/model/links.dart';
+import 'package:unsplash_flutter/model/urls.dart';
 import 'package:unsplash_flutter/model/user.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:unsplash_flutter/model/user_collection.dart';
 
 part 'photo.g.dart';
 
@@ -17,6 +20,9 @@ class Photo {
     required this.likes,
     required this.likedByUser,
     required this.description,
+    // required this.currentUserCollections,
+    required this.urls,
+    required this.links,
     required this.user,
   });
 
@@ -39,6 +45,12 @@ class Photo {
   bool? likedByUser;
 
   String? description;
+
+  // List<UserCollection> currentUserCollections;
+
+  Urls urls;
+
+  Links links;
 
   User user;
 

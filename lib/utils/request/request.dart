@@ -31,10 +31,8 @@ class DioManager {
 }
 
 class DioHttpInterceptor extends Interceptor {
-
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-
     options.headers['Accept-Version'] = RequestConfig.acceptVersion;
 
     options.headers['Authorization'] = RequestConfig.defaultAuthorization;
@@ -48,9 +46,9 @@ class DioHttpInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // if (kDebugMode) {
-    //   print(response);
-    // }
+    if (kDebugMode) {
+      print(response);
+    }
     super.onResponse(response, handler);
   }
 

@@ -21,6 +21,8 @@ Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
       likes: json['likes'] as int?,
       likedByUser: json['liked_by_user'] as bool?,
       description: json['description'] as String?,
+      urls: Urls.fromJson(json['urls'] as Map<String, dynamic>),
+      links: Links.fromJson(json['links'] as Map<String, dynamic>),
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
@@ -35,5 +37,7 @@ Map<String, dynamic> _$PhotoToJson(Photo instance) => <String, dynamic>{
       'likes': instance.likes,
       'liked_by_user': instance.likedByUser,
       'description': instance.description,
+      'urls': instance.urls.toJson(),
+      'links': instance.links.toJson(),
       'user': instance.user.toJson(),
     };
