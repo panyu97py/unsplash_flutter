@@ -55,7 +55,7 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> imgList = photoList.map((Photo photo) => ImageView(src: photo.urls.small!, margin: const EdgeInsets.only(bottom: 20))).toList();
+    List<Widget> imgList = photoList.map((Photo photo) => ImageView(src: photo.urls.small!)).toList();
 
     return Container(
         color: Colors.white,
@@ -67,7 +67,7 @@ class HomeViewState extends State<HomeView> {
               children: [
                 const TitleView(title: title, subTitle: subTitle),
                 SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30)),
-                Container(margin: const EdgeInsets.only(top: 20), child: FlowView(children: imgList))
+                Container(margin: const EdgeInsets.only(top: 20), child: FlowView(children: imgList,marginSize: 20,))
               ],
             )));
   }

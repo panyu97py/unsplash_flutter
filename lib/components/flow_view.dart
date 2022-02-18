@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FlowView extends StatelessWidget {
-  const FlowView({Key? key, this.children}) : super(key: key);
+  const FlowView({Key? key, this.children, this.marginSize}) : super(key: key);
 
   final List<Widget>? children;
+  final double? marginSize;
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +13,13 @@ class FlowView extends StatelessWidget {
     List<Widget> rightList = [];
 
     children?.forEach((element) {
-      if (leftList.length > rightList.length) return rightList.add(element);
-      leftList.add(element);
+      Widget tempWidget = Container(margin: EdgeInsets.only(bottom: marginSize!), child: element);
+      if (leftList.length > rightList.length) return rightList.add(tempWidget);
+      leftList.add(tempWidget);
     });
 
     return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Expanded(child: Column(children: leftList)), const SizedBox(width: 20), Expanded(child: Column(children: rightList))]);
+        children: [Expanded(child: Column(children: leftList)), SizedBox(width: marginSize), Expanded(child: Column(children: rightList))]);
   }
 }
