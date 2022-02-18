@@ -7,6 +7,7 @@ import 'package:unsplash_flutter/api/photo_api_server.dart';
 import 'package:unsplash_flutter/model/photo.dart';
 import 'package:unsplash_flutter/utils/pageable.dart';
 import 'package:unsplash_flutter/components/flow_view.dart';
+import 'package:unsplash_flutter/constant/routes_options.dart';
 import 'components/search_input.dart';
 
 class HomeView extends StatefulWidget {
@@ -53,9 +54,18 @@ class HomeViewState extends State<HomeView> {
 
   void handleSearch() {}
 
+  void handlePhotoClick(Photo photo) {
+    Navigator.of(context).pushNamed(PageName.photoDetail, arguments: {"id": photo.id});
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> imgList = photoList.map((Photo photo) => ImageView(src: photo.urls.small!)).toList();
+    List<Widget> imgList = photoList
+        .map((Photo photo) => ImageView(
+              src: photo.urls.small!,
+              onTap: () => handlePhotoClick(photo),
+            ))
+        .toList();
 
     return Container(
         color: Colors.white,
@@ -67,7 +77,12 @@ class HomeViewState extends State<HomeView> {
               children: [
                 const TitleView(title: title, subTitle: subTitle),
                 SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30)),
-                Container(margin: const EdgeInsets.only(top: 20), child: FlowView(children: imgList,marginSize: 20,))
+                Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: FlowView(
+                      children: imgList,
+                      marginSize: 20,
+                    ))
               ],
             )));
   }
