@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:unsplash_flutter/components/image_view.dart';
 import 'package:unsplash_flutter/constant/app_theme.dart';
 import 'package:unsplash_flutter/components/title_View.dart';
 import 'package:unsplash_flutter/api/photo_api_server.dart';
@@ -53,7 +54,8 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    List <Widget> imgList = photoList.map((Photo photo) => Image.network(photo.urls.small!)).toList();
+    List<Widget> imgList = photoList.map((Photo photo) => ImageView(src: photo.urls.small!)).toList();
+
     return Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: AppTheme.viewHorizontalPadding),
