@@ -78,7 +78,7 @@ class HomeViewState extends State<HomeView> {
                 const TitleView(title: title, subTitle: subTitle),
                 SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30)),
                 Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 30),
                     child: FlowView(
                       children: imgList,
                       marginSize: 20,
