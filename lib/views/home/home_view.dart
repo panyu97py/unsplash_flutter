@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:unsplash_flutter/app_theme.dart';
+import 'package:unsplash_flutter/constant/app_theme.dart';
 import 'package:unsplash_flutter/components/title_View.dart';
-import 'package:unsplash_flutter/utils/request/request.dart';
+import 'package:unsplash_flutter/api/photo_api_server.dart';
+import 'package:unsplash_flutter/utils/pageable.dart';
 import 'components/search_input.dart';
 
 class HomeView extends StatefulWidget {
@@ -21,7 +22,7 @@ class HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    DioManager.getDioInstance()?.get("/photos/random");
+    PhotoApiServer.getPhotoList(pageable: Pageable(pageNum: 1, pageSize: 10, orderBy: OrderBy.latest));
     initSearchInputController();
     super.initState();
   }
@@ -35,22 +36,20 @@ class HomeViewState extends State<HomeView> {
     });
   }
 
+  void handleSearch() {}
+
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppTheme.viewHorizontalPadding),
+        padding: const EdgeInsets.symmetric(horizontal: AppTheme.viewHorizontalPadding),
         child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const TitleView(title: title, subTitle: subTitle),
-                SearchInput(
-                    controller: searchInputController,
-                    hintText: searchInputHintText,
-                    margin: const EdgeInsets.only(top: 30))
+                SearchInput(onSearch: handleSearch, controller: searchInputController, hintText: searchInputHintText, margin: const EdgeInsets.only(top: 30))
               ],
             )));
   }

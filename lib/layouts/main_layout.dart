@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unsplash_flutter/app_theme.dart';
+import 'package:unsplash_flutter/constant/app_theme.dart';
 import 'package:unsplash_flutter/components/drawer_view.dart';
 
 class MainLayout extends StatefulWidget {
