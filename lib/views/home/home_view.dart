@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:unsplash_flutter/constant/app_theme.dart';
 import 'package:unsplash_flutter/components/title_View.dart';
 import 'package:unsplash_flutter/api/photo_api_server.dart';
+import 'package:unsplash_flutter/model/photo.dart';
 import 'package:unsplash_flutter/utils/pageable.dart';
 import 'components/search_input.dart';
 
@@ -22,9 +27,17 @@ class HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    PhotoApiServer.getPhotoList(pageable: Pageable(pageNum: 1, pageSize: 10, orderBy: OrderBy.latest));
+    getPhotoDetail();
     initSearchInputController();
     super.initState();
+  }
+
+  Future getPhotoDetail() async {
+    Response? response = await PhotoApiServer.getPhotoDetail(id: "z3htkdHUh5w");
+    Photo photo = Photo.fromJson(json.decode(response.toString()));
+    if (kDebugMode) {
+      print(photo.id);
+    }
   }
 
   void initSearchInputController() {

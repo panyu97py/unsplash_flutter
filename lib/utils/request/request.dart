@@ -48,9 +48,9 @@ class DioHttpInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    if (kDebugMode) {
-      print(response);
-    }
+    // if (kDebugMode) {
+    //   print(response);
+    // }
     super.onResponse(response, handler);
   }
 
