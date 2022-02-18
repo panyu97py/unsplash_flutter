@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +32,9 @@ class HomeViewState extends State<HomeView> {
 
   Future getPhotoDetail() async {
     Response? response = await PhotoApiServer.getPhotoDetail(id: "z3htkdHUh5w");
-    Photo photo = Photo.fromJson(json.decode(response.toString()));
+    Photo photo = Photo.fromJson(response?.data);
     if (kDebugMode) {
-      print(photo.id);
+      print(photo.user.id);
     }
   }
 
