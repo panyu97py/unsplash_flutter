@@ -4,8 +4,11 @@ import 'package:unsplash_flutter/views/home/home_view.dart';
 import 'package:unsplash_flutter/views/login/login_view.dart';
 import 'package:unsplash_flutter/views/my/my_view.dart';
 import 'package:unsplash_flutter/views/photoDetail/photo_detail_view.dart';
+import 'package:unsplash_flutter/main.dart';
 
 class PageName {
+
+  static const String drawer = "drawer";
 
   static const String my = 'my';
 
@@ -36,7 +39,9 @@ class PageRouters {
 
     PageName.login: (BuildContext context) => const LoginView(),
 
-    PageName.photoDetail: (BuildContext context) => const PhotoDetailView()
+    PageName.photoDetail: (BuildContext context) => const PhotoDetailView(),
+
+    PageName.drawer: (BuildContext context) => const HomeDrawerView()
 
   };
 }
