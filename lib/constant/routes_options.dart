@@ -22,21 +22,20 @@ class PageName {
 }
 
 class PageRoutersOptions {
-
   /// 初始化的路由
   static const String initRoute = PageName.home;
 
   /// Drawer/二级 路由配置
-  static final Map<String, WidgetBuilder> drawerRoutes = {
-    PageName.my: (BuildContext context) => const MyView(),
-    PageName.home: (BuildContext context) => const HomeView(),
-    PageName.collections: (BuildContext context) => const CollectionsView(),
+  static final Map<String, Function> drawerRoutes = {
+    PageName.my: (Object? arguments) => const MyView(),
+    PageName.home: (Object? arguments) => const HomeView(),
+    PageName.collections: (Object? arguments) => const CollectionsView(),
   };
 
   /// 普通/顶层 路由配置
-  static final Map<String, WidgetBuilder> normalRoutes = {
-    PageName.login: (BuildContext context) => const LoginView(),
-    PageName.photoDetail: (BuildContext context) => const PhotoDetailView(),
+  static final Map<String, Function> normalRoutes = {
+    PageName.login: (Object? arguments) => const LoginView(),
+    PageName.photoDetail: (Object arguments) => PhotoDetailView(photoId: arguments as String),
   };
 
   /// 构建 Drawer/二级 路由布局
@@ -46,7 +45,6 @@ class PageRoutersOptions {
 
   /// 生成 普通/顶层 路由
   static Route<dynamic>? generateNormalRoute(RouteSettings settings) {
-
     bool isNormalRoute = normalRoutes.containsKey(settings.name);
 
     bool isDrawerRoute = drawerRoutes.containsKey(settings.name);
@@ -56,7 +54,7 @@ class PageRoutersOptions {
     }
 
     if (isNormalRoute) {
-      return MaterialPageRoute(builder: normalRoutes[settings.name]!, settings: settings);
+      return MaterialPageRoute(builder: (BuildContext context) => normalRoutes[settings.name]!(settings.arguments), settings: settings);
     }
 
     throw Exception('Invalid normal route: ${settings.name}');
@@ -64,9 +62,8 @@ class PageRoutersOptions {
 
   ///  生成 Drawer/二级 路由
   static Route<dynamic> generateDrawerRoute(RouteSettings settings) {
-
     if (drawerRoutes.containsKey(settings.name)) {
-      return NoAnimationPageRoute(builder: drawerRoutes[settings.name]!);
+      return NoAnimationPageRoute(builder: (BuildContext context) => drawerRoutes[settings.name]!(settings.arguments));
     }
 
     throw Exception('Invalid drawer route: ${settings.name}');
