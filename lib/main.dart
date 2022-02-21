@@ -7,8 +7,6 @@ void main() {
   runApp(const MyApp());
 }
 
-/// todo 路由改造
-/// http://kmanong.top/kmn/qxw/form/article?id=2713&cate=42
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
