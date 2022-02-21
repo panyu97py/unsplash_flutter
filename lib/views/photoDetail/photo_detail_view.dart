@@ -33,18 +33,22 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
         color: Colors.black,
         child: Center(
             child: FutureBuilder(
                 future: _future,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  Widget loadingWidget = const CircularProgressIndicator(color: Colors.white);
+
                   if (snapshot.connectionState == ConnectionState.done) {
                     String? photoUrl = photoDetail?.urls.full;
-                    return Image.network(photoUrl!);
+                    return Image.network(photoUrl!, loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return loadingWidget;
+                    });
                   } else {
-                    return const CircularProgressIndicator(color: Colors.white,);
+                    return loadingWidget;
                   }
                 })));
   }
