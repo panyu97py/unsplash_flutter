@@ -55,7 +55,7 @@ class HomeViewState extends State<HomeView> {
   void handleSearch() {}
 
   void handlePhotoClick(Photo photo) {
-    Navigator.of(context).pushNamed(PageName.photoDetail, arguments: {"id": photo.id});
+    Navigator.of(context, rootNavigator: true).pushNamed(PageName.photoDetail, arguments: {"id": photo.id});
   }
 
   @override

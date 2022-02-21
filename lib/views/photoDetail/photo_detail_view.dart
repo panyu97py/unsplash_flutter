@@ -10,6 +10,6 @@ class PhotoDetailView extends StatefulWidget {
 class _PhotoDetailView extends State<PhotoDetailView> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container( color:Colors.white,child: const Center(child: Text("photoDetail")));
   }
 }

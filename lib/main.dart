@@ -6,6 +6,7 @@ import 'package:unsplash_flutter/utils/no_animation_page_route.dart';
 void main() {
   runApp(const MyApp());
 }
+
 /// todo 路由改造
 /// http://kmanong.top/kmn/qxw/form/article?id=2713&cate=42
 class MyApp extends StatelessWidget {
@@ -21,17 +22,17 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: generateNormalRoute);
   }
 
-  Route<dynamic> generateNormalRoute(RouteSettings settings) {
-    bool isNormalRoute = PageRouters.drawerRoutes.containsKey(settings.name);
+  Route<dynamic>? generateNormalRoute(RouteSettings settings) {
+    bool isNormalRoute = PageRouters.normalRoutes.containsKey(settings.name);
     bool isDrawerRoute = PageRouters.drawerRoutes.containsKey(settings.name);
     if (!isNormalRoute && !isDrawerRoute) {
       throw Exception('Invalid normal route: ${settings.name}');
     }
     if (isDrawerRoute) {
-      return NoAnimationPageRoute(builder: PageRouters.normalRoutes[PageName.drawer]!);
+      return MaterialPageRoute(builder: PageRouters.normalRoutes[PageName.drawer]!,settings: settings);
     }
     WidgetBuilder? builder = PageRouters.normalRoutes[settings.name];
-    return NoAnimationPageRoute(builder: builder!);
+    return MaterialPageRoute(builder: builder!,settings: settings);
   }
 }
 
