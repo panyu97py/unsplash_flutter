@@ -14,7 +14,6 @@ class PhotoDetailView extends StatefulWidget {
 }
 
 class PhotoDetailViewState extends State<PhotoDetailView> {
-
   /// 图片详情
   Photo? photoDetail;
 
@@ -49,10 +48,11 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
 
                   if (snapshot.connectionState == ConnectionState.done) {
                     String? photoUrl = photoDetail?.urls.full;
-                    return CachedNetworkImage(
-                      placeholder: (context, url) => loadingWidget,
-                      imageUrl: photoUrl!
-                    );
+                    return InteractiveViewer(
+                        child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: CachedNetworkImage(placeholder: (context, url) => Center(child: loadingWidget), imageUrl: photoUrl!)));
                   } else {
                     return loadingWidget;
                   }
