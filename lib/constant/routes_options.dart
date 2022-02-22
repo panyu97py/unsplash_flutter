@@ -8,16 +8,20 @@ import 'package:unsplash_flutter/views/photoDetail/photo_detail_view.dart';
 import 'package:unsplash_flutter/layouts/main_layout.dart';
 
 class PageName {
-  static const String drawer = "drawer";
 
+  /// 个人中心
   static const String my = 'my';
 
+  /// 首页
   static const String home = 'home';
 
+  /// 收藏页
   static const String collections = 'collections';
 
+  /// 登陆页
   static const String login = 'login';
 
+  /// 图片详情页
   static const String photoDetail = 'photoDetail';
 }
 

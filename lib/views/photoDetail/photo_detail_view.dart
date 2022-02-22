@@ -14,9 +14,14 @@ class PhotoDetailView extends StatefulWidget {
 }
 
 class PhotoDetailViewState extends State<PhotoDetailView> {
+
+  /// 图片详情
   Photo? photoDetail;
+
+  /// FutureBuilder 加载
   Future? _future;
 
+  /// 接口获取图片详情
   Future getPhotoDetail(String photoId) async {
     Response? response = await PhotoApiServer.getPhotoDetail(id: photoId);
     setState(() {

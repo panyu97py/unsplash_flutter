@@ -10,7 +10,11 @@ class CollectionsView extends StatefulWidget {
 }
 
 class _CollectionsView extends State<CollectionsView> {
+
+  /// 标题
   static const String title = 'Collections';
+
+  /// 副标题
   static const String subTitle = 'Explore the world through collections of beautiful HD pictures';
 
   @override

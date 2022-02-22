@@ -18,11 +18,20 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
+
+  /// 标题
   static const String title = 'Unsplash';
+
+  /// 副标题
   static const String subTitle = 'Beautiful, free photos.';
+
+  /// 输入框 HintText
   static const String searchInputHintText = "Search photos";
 
+  /// 输入框 controller
   TextEditingController? searchInputController;
+
+  /// 图片搜索关键字
   String? searchText;
 
   /// 照片列表
@@ -35,6 +44,7 @@ class HomeViewState extends State<HomeView> {
     super.initState();
   }
 
+  /// 接口获取图片列表
   Future getPhotoList() async {
     Response? response = await PhotoApiServer.getPhotoList();
     List jsonList = response?.data as List;
@@ -43,6 +53,7 @@ class HomeViewState extends State<HomeView> {
     });
   }
 
+  /// 初始化输入框 controller
   void initSearchInputController() {
     searchInputController = TextEditingController();
     searchInputController?.addListener(() {
@@ -52,8 +63,10 @@ class HomeViewState extends State<HomeView> {
     });
   }
 
+  /// 搜索事件
   void handleSearch() {}
 
+  /// 图片点击事件
   void handlePhotoClick(Photo photo) {
     Navigator.of(context, rootNavigator: true).pushNamed(PageName.photoDetail, arguments: photo.id);
   }
