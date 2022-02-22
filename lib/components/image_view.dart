@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageView extends StatelessWidget {
@@ -12,6 +13,6 @@ class ImageView extends StatelessWidget {
         onTap: onTap,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(src)));
+            child: CachedNetworkImage(imageUrl: src)));
   }
 }
