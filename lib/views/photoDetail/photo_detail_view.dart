@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:unsplash_flutter/api/photo_api_server.dart';
@@ -43,10 +44,14 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
 
                   if (snapshot.connectionState == ConnectionState.done) {
                     String? photoUrl = photoDetail?.urls.full;
-                    return Image.network(photoUrl!, loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return loadingWidget;
-                    });
+                    // return Image.network(photoUrl!, loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                    //   if (loadingProgress == null) return child;
+                    //   return loadingWidget;
+                    // });
+                    return CachedNetworkImage(
+                      placeholder: (context, url) => loadingWidget,
+                      imageUrl: photoUrl!
+                    );
                   } else {
                     return loadingWidget;
                   }
