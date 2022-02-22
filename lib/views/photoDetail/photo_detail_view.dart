@@ -40,22 +40,19 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.black,
-        child: Center(
-            child: FutureBuilder(
-                future: _future,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  Widget loadingWidget = const CircularProgressIndicator(color: Colors.white);
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: FutureBuilder(
+            future: _future,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              Widget loadingWidget = const Center(child: CircularProgressIndicator(color: Colors.white));
 
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    String? photoUrl = photoDetail?.urls.full;
-                    return InteractiveViewer(
-                        child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            child: CachedNetworkImage(placeholder: (context, url) => Center(child: loadingWidget), imageUrl: photoUrl!)));
-                  } else {
-                    return loadingWidget;
-                  }
-                })));
+              if (snapshot.connectionState == ConnectionState.done) {
+                String? photoUrl = photoDetail?.urls.full;
+                return InteractiveViewer(child: CachedNetworkImage(placeholder: (context, url) => loadingWidget, imageUrl: photoUrl!));
+              } else {
+                return loadingWidget;
+              }
+            }));
   }
 }
