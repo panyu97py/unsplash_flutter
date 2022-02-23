@@ -37,13 +37,6 @@ class HomeViewState extends State<HomeView> {
   /// 照片列表
   List<Photo> photoList = [];
 
-  @override
-  void initState() {
-    getPhotoList();
-    initSearchInputController();
-    super.initState();
-  }
-
   /// 接口获取图片列表
   Future getPhotoList() async {
     Response? response = await PhotoApiServer.getPhotoList();
@@ -69,6 +62,13 @@ class HomeViewState extends State<HomeView> {
   /// 图片点击事件
   void handlePhotoClick(Photo photo) {
     Navigator.of(context, rootNavigator: true).pushNamed(PageName.photoDetail, arguments: photo.id);
+  }
+
+  @override
+  void initState() {
+    getPhotoList();
+    initSearchInputController();
+    super.initState();
   }
 
   @override
