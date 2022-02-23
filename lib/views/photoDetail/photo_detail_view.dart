@@ -39,10 +39,7 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
 
   /// 打开底部弹窗
   void showBottomModal() {
-    showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (BuildContext content) => const BottomModal());
+    showModalBottomSheet(context: context, backgroundColor: Colors.transparent, builder: (BuildContext content) => const BottomModal());
   }
 
   @override
@@ -57,14 +54,13 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   Widget loadingWidget = const Center(child: CircularProgressIndicator(color: Colors.white));
 
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    String? photoUrl = photoDetail?.urls.full;
-                    return InkWell(
-                        onLongPress: showBottomModal,
-                        child: InteractiveViewer(child: CachedNetworkImage(placeholder: (context, url) => loadingWidget, imageUrl: photoUrl!)));
-                  } else {
-                    return loadingWidget;
-                  }
+                  if (snapshot.connectionState != ConnectionState.done) return loadingWidget;
+
+                  String? photoUrl = photoDetail?.urls.full;
+
+                  return InkWell(
+                      onLongPress: showBottomModal,
+                      child: InteractiveViewer(child: CachedNetworkImage(placeholder: (context, url) => loadingWidget, imageUrl: photoUrl!)));
                 })));
   }
 }
