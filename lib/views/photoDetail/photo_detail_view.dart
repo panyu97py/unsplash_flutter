@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:unsplash_flutter/api/photo_api_server.dart';
 import 'package:unsplash_flutter/model/photo.dart';
+import 'components/bottom_modal.dart';
 
 class PhotoDetailView extends StatefulWidget {
   const PhotoDetailView({Key? key, required this.photoId}) : super(key: key);
@@ -36,12 +37,12 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
     super.initState();
   }
 
+  /// 打开底部弹窗
   void showBottomModal() {
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext content) {
-          return Container(color: Colors.white);
-        });
+        backgroundColor: Colors.transparent,
+        builder: (BuildContext content) => const BottomModal());
   }
 
   @override
