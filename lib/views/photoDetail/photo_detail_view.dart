@@ -29,17 +29,17 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
     });
   }
 
+  /// 打开底部弹窗
+  void showBottomModal() {
+    showModalBottomSheet(context: context, backgroundColor: Colors.transparent, builder: (BuildContext content) => const BottomModal());
+  }
+
   @override
   void initState() {
     setState(() {
       _future = getPhotoDetail(widget.photoId);
     });
     super.initState();
-  }
-
-  /// 打开底部弹窗
-  void showBottomModal() {
-    showModalBottomSheet(context: context, backgroundColor: Colors.transparent, builder: (BuildContext content) => const BottomModal());
   }
 
   @override
