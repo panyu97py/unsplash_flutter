@@ -9,6 +9,8 @@ import 'package:unsplash_flutter/layouts/main_layout.dart';
 
 class PageName {
 
+  PageName._();
+
   /// 个人中心
   static const String my = 'my';
 
@@ -26,6 +28,9 @@ class PageName {
 }
 
 class PageRoutersOptions {
+
+  PageRoutersOptions._();
+
   /// 初始化的路由
   static const String initRoute = PageName.home;
 
