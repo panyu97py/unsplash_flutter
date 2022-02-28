@@ -3,10 +3,9 @@ import 'package:unsplash_flutter/components/flow_view.dart';
 import 'package:unsplash_flutter/constant/custom_icons.dart';
 import 'package:unsplash_flutter/model/photo.dart';
 import 'package:unsplash_flutter/model/user.dart';
-import 'package:unsplash_flutter/components/image_view.dart';
 
 class BottomModal extends StatelessWidget {
-  const BottomModal({Key? key, required this.authorDetail, required this.authorPhotoList}) : super(key: key);
+  const BottomModal({Key? key, required this.authorDetail, required this.authorPhotoList, this.onDownLoad}) : super(key: key);
 
   /// 作者详情
   final User authorDetail;
@@ -14,9 +13,15 @@ class BottomModal extends StatelessWidget {
   /// 作者作品列表
   final List<Photo> authorPhotoList;
 
+  /// 点击下载事件
+  final VoidCallback? onDownLoad;
+
   /// 操作卡片
   Widget buildOperate(BuildContext context) {
-    return Row(children: const [InkWell(child: Icon(CustomIcons.download)), InkWell(child: Icon(CustomIcons.like))]);
+    return Row(children: [
+      Container(margin: const EdgeInsets.only(right: 15), child: InkWell(onTap: onDownLoad, child: const Icon(CustomIcons.download))),
+      const InkWell(child: Icon(CustomIcons.like))
+    ]);
   }
 
   @override
@@ -74,8 +79,8 @@ class UserInfoCard extends StatelessWidget {
               decoration: avatarBoxDecoration,
               child: CircleAvatar(radius: avatarSize, backgroundImage: NetworkImage(avatarUrl!))),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(userDetail.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-            Text("@${userDetail.username}", style: const TextStyle(color: Colors.grey, fontSize: 15))
+            Text(userDetail.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Text("@${userDetail.username}", style: const TextStyle(color: Colors.grey, fontSize: 14))
           ])
         ]));
   }
