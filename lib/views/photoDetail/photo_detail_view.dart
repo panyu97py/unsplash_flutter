@@ -60,8 +60,7 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
   /// 打开底部弹窗
   void showBottomModal() async {
     String? username = photoDetail?.user.username;
-    await getAuthorDetail(username!);
-    await getAuthorPhotoList(username: username, pageable: Pageable());
+    await Future.wait([getAuthorDetail(username!), getAuthorPhotoList(username: username, pageable: Pageable(pageNum: 1, pageSize: 15))]);
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -73,8 +72,8 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
 
   /// 图片点击事件
   void handlePhotoClick(Photo photo) {
-    Navigator.of(context, rootNavigator: true).pop();// 关闭弹窗
-    Navigator.of(context, rootNavigator: true).pushNamed(PageName.photoDetail, arguments: photo.id);// 打开新的图片详情页面
+    Navigator.of(context, rootNavigator: true).pop(); // 关闭弹窗
+    Navigator.of(context, rootNavigator: true).pushNamed(PageName.photoDetail, arguments: photo.id); // 打开新的图片详情页面
   }
 
   @override

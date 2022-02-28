@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:unsplash_flutter/components/image_view.dart';
 import 'package:unsplash_flutter/constant/app_theme.dart';
 import 'package:unsplash_flutter/components/title_View.dart';
 import 'package:unsplash_flutter/api/photo_api_server.dart';
@@ -39,7 +38,7 @@ class HomeViewState extends State<HomeView> {
 
   /// 接口获取图片列表
   Future getPhotoList() async {
-    Response? response = await PhotoApiServer.getPhotoList();
+    Response? response = await PhotoApiServer.getPhotoList(pageable: Pageable(pageNum: 1,pageSize: 15));
     List jsonList = response?.data as List;
     setState(() {
       photoList = jsonList.map((photo) => Photo.fromJson(photo)).toList();
