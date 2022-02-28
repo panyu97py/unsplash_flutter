@@ -22,11 +22,6 @@ class BottomModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Radius borderRadiusSize = const Radius.circular(20);
-    List<Widget> imgList = authorPhotoList
-        .map((Photo photo) => ImageView(
-              src: photo.urls.small!,
-            ))
-        .toList();
 
     return Container(
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -41,7 +36,7 @@ class BottomModal extends StatelessWidget {
                   buildOperate(context),
                 ]),
               ),
-              Expanded(child: SingleChildScrollView(child: FlowView(children: imgList))),
+              Expanded(child: SingleChildScrollView(child: FlowView(imgList: authorPhotoList, getImgUrl: (Photo photo) => photo.urls.small))),
             ])));
   }
 }

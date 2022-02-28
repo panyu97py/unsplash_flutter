@@ -73,12 +73,6 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> imgList = photoList
-        .map((Photo photo) => ImageView(
-              src: photo.urls.small!,
-              onTap: () => handlePhotoClick(photo),
-            ))
-        .toList();
 
     return Container(
         color: Colors.white,
@@ -93,8 +87,10 @@ class HomeViewState extends State<HomeView> {
                 Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FlowView(
-                      children: imgList,
-                      marginSize: 20,
+                        marginSize: 20,
+                        imgList: photoList,
+                        getImgUrl: (Photo photo) => photo.urls.small,
+                        onImgTap: (Photo photo) => handlePhotoClick(photo),
                     ))
               ],
             )));
