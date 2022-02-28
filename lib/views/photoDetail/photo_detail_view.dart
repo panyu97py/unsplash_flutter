@@ -6,6 +6,7 @@ import 'package:unsplash_flutter/api/user_api_server.dart';
 import 'package:unsplash_flutter/model/photo.dart';
 import 'package:unsplash_flutter/model/user.dart';
 import 'package:unsplash_flutter/utils/pageable.dart';
+import 'package:unsplash_flutter/constant/routes_options.dart';
 import 'components/bottom_modal.dart';
 
 class PhotoDetailView extends StatefulWidget {
@@ -66,8 +67,14 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
         backgroundColor: Colors.transparent,
         isScrollControlled: true,
         builder: (BuildContext content) {
-          return BottomModal(authorDetail: authorDetail!, authorPhotoList: authorPhotoList);
+          return BottomModal(authorDetail: authorDetail!, authorPhotoList: authorPhotoList, onImgTap: handlePhotoClick);
         });
+  }
+
+  /// 图片点击事件
+  void handlePhotoClick(Photo photo) {
+    Navigator.of(context, rootNavigator: true).pop();// 关闭弹窗
+    Navigator.of(context, rootNavigator: true).pushNamed(PageName.photoDetail, arguments: photo.id);// 打开新的图片详情页面
   }
 
   @override

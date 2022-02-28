@@ -5,7 +5,7 @@ import 'package:unsplash_flutter/model/photo.dart';
 import 'package:unsplash_flutter/model/user.dart';
 
 class BottomModal extends StatelessWidget {
-  const BottomModal({Key? key, required this.authorDetail, required this.authorPhotoList, this.onDownLoad}) : super(key: key);
+  const BottomModal({Key? key, required this.authorDetail, required this.authorPhotoList, this.onDownLoad, this.onImgTap}) : super(key: key);
 
   /// 作者详情
   final User authorDetail;
@@ -15,6 +15,8 @@ class BottomModal extends StatelessWidget {
 
   /// 点击下载事件
   final VoidCallback? onDownLoad;
+
+  final Function? onImgTap;
 
   /// 操作卡片
   Widget buildOperate(BuildContext context) {
@@ -41,7 +43,9 @@ class BottomModal extends StatelessWidget {
                   buildOperate(context),
                 ]),
               ),
-              Expanded(child: SingleChildScrollView(child: FlowView(imgList: authorPhotoList, getImgUrl: (Photo photo) => photo.urls.small))),
+              Expanded(
+                  child: SingleChildScrollView(
+                      child: FlowView(imgList: authorPhotoList, getImgUrl: (Photo photo) => photo.urls.small, onImgTap: (Photo photo) => onImgTap!(photo)))),
             ])));
   }
 }
