@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FlowView extends StatelessWidget {
-  const FlowView({Key? key, this.children, this.marginSize}) : super(key: key);
+  const FlowView({Key? key, this.children, this.marginSize = 20}) : super(key: key);
 
   final List<Widget>? children;
   final double? marginSize;

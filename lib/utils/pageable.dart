@@ -1,7 +1,7 @@
 enum OrderBy { latest, oldest, popular }
 
 class Pageable {
-  Pageable({this.pageNum = 1, this.pageSize, this.orderBy});
+  Pageable({this.pageNum = 1, this.pageSize, this.orderBy = OrderBy.latest});
 
   int? pageNum;
 
