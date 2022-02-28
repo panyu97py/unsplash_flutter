@@ -64,6 +64,7 @@ class PhotoDetailViewState extends State<PhotoDetailView> {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
+        isScrollControlled: true,
         builder: (BuildContext content) {
           return BottomModal(authorDetail: authorDetail!, authorPhotoList: authorPhotoList);
         });

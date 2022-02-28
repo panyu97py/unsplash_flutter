@@ -32,7 +32,7 @@ class BottomModal extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topLeft: borderRadiusSize, topRight: borderRadiusSize)),
         child: SizedBox(
-            height: 1000,
+            height: MediaQuery.of(context).size.height * 0.7,
             child: Column(children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
