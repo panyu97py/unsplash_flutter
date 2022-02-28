@@ -6,37 +6,22 @@ import 'package:unsplash_flutter/model/user.dart';
 import 'package:unsplash_flutter/components/image_view.dart';
 
 class BottomModal extends StatelessWidget {
-  const BottomModal({Key? key, this.authorDetail, required this.authorPhotoList}) : super(key: key);
+  const BottomModal({Key? key, required this.authorDetail, required this.authorPhotoList}) : super(key: key);
 
   /// 作者详情
-  final User? authorDetail;
+  final User authorDetail;
 
   /// 作者作品列表
   final List<Photo> authorPhotoList;
 
-  /// 头像尺寸
-  static const double avatarSize = 20;
-
-  /// 头像路径
-  static const String avatarUrl = 'https://pic2.zhimg.com/v2-639b49f2f6578eabddc458b84eb3c6a1.jpg';
-
-  /// 用户信息及操作卡片
-  Widget buildUserInfoAndOperate(BuildContext context) {
-    return Row(children: [
-      const CircleAvatar(radius: avatarSize, backgroundImage: NetworkImage(avatarUrl)),
-      Column(
-        children: const [Text('data'), Text('data')],
-      ),
-      const Icon(CustomIcons.download),
-      const Icon(CustomIcons.like),
-      const Icon(CustomIcons.alreadyLike),
-    ]);
+  /// 操作卡片
+  Widget buildOperate(BuildContext context) {
+    return Row(children: const [InkWell(child: Icon(CustomIcons.download)), InkWell(child: Icon(CustomIcons.like))]);
   }
 
   @override
   Widget build(BuildContext context) {
     Radius borderRadiusSize = const Radius.circular(20);
-    Widget userInfoAndOperateWidget = buildUserInfoAndOperate(context);
     List<Widget> imgList = authorPhotoList
         .map((Photo photo) => ImageView(
               src: photo.urls.small!,
@@ -49,8 +34,54 @@ class BottomModal extends StatelessWidget {
         child: SizedBox(
             height: 1000,
             child: Column(children: [
-              userInfoAndOperateWidget,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  UserInfoCard(userDetail: authorDetail),
+                  buildOperate(context),
+                ]),
+              ),
               Expanded(child: SingleChildScrollView(child: FlowView(children: imgList))),
             ])));
+  }
+}
+
+/// 用户信息卡片
+class UserInfoCard extends StatelessWidget {
+  const UserInfoCard({Key? key, required this.userDetail, this.onTap}) : super(key: key);
+
+  final User userDetail;
+
+  final VoidCallback? onTap;
+
+  static const double avatarSize = 24;
+
+  @override
+  Widget build(BuildContext context) {
+    String? avatarUrl = userDetail.profileImage?.medium;
+
+    BoxDecoration avatarBoxDecoration = const BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 10, //阴影范围
+              spreadRadius: 0.1, //阴影浓度
+              color: Colors.grey //阴影颜色
+              )
+        ],
+        borderRadius: BorderRadius.all(Radius.circular(avatarSize)));
+
+    return InkWell(
+        onTap: onTap,
+        child: Row(children: [
+          Container(
+              margin: const EdgeInsets.only(right: 10),
+              decoration: avatarBoxDecoration,
+              child: CircleAvatar(radius: avatarSize, backgroundImage: NetworkImage(avatarUrl!))),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(userDetail.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text("@${userDetail.username}", style: const TextStyle(color: Colors.grey, fontSize: 15))
+          ])
+        ]));
   }
 }
